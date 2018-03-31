@@ -14,4 +14,4 @@ ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8
 ip6tables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080
 
 #Begin mitmproxy
-mitmproxy --mode transparent --showhost
+mitmproxy -T
