@@ -5,9 +5,9 @@ from netlib.http import Headers
 def request(flow):
      print('FLAG')
      print(flow.request.pretty_host)
-     if flow.request.pretty_host == "example.org":
+     if flow.request.pretty_host == "google.com":
          #flow.request.host = "10.0.2.4"
-         flow.request.host = "google.com"
+         flow.request.host = "whipped.in"
          #flow.request.port = "5000"
 
 
