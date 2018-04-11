@@ -20,8 +20,8 @@ class Utils:
     def store_user(params):
         data = params["name"]
         data = data + "\t" + params["email"]
-        data = data + "\t" + params["mac_address"]
-        data = data + "\t" + params["ip_address"]
+        data = data + "\t" + params["mac"]
+        data = data + "\t" + params["ip"]
         data = data + "\t" + get_date()
         with open(Constants.USER_STORE_FILE, "a+") as w:
             w.write(data)
@@ -30,8 +30,8 @@ class Utils:
     @staticmethod
     def unblock_user(params):
         store_user(params)
-        update_ip_table(params["mac_address"])
-        run_rmtrack(params["ip_address"])
+        update_ip_table(params["mac"])
+        run_rmtrack(params["ip"])
 
     @staticmethod
     def get_date():

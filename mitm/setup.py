@@ -5,6 +5,7 @@ setup(
 	packages=['mitm'],
 	include_package_data=True,
 	install_requires=[
-	'flask'
+		'flask',
+		'wtforms'
 	],
 )
