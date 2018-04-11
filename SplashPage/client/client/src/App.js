@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 
 import 'antd/dist/antd.css';
-import { Row, Col } from 'antd';
+import { Form, Icon, Input, Button, Row, Col } from 'antd';
 
 class App extends Component {
   render() {
+    var ip = request.connection.remoteAddress
     return (
       <div className="App">
       <Row>
@@ -35,6 +36,17 @@ class App extends Component {
           &nbsp;&nbsp;&nbsp;&nbsp;
           - Re-enter the upgrade link: <a>internetupgrade.marriott.com</a>
           <br/>
+          <br/>
+
+
+          <form action="http://localhost:5000/" method="post" role="form">
+            <label>
+              Name:
+              <br/><input type="text" name="name" />
+            </label>
+            <br/><input type="submit" value="Submit" />
+          </form>
+
           <br/>
             If you are not currently at a property, then we invite you to visit Marriott.com to make a reservation, find a vacation deal, or explore our more than 6000 properties worldwide.
           </p>
