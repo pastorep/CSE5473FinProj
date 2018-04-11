@@ -1,26 +1,18 @@
-from mitmproxy import ctx
-from mitmproxy import flow
 import mitmproxy
-
+from mitmproxy.models import HTTPResponse
+from netlib.http import Headers
 def request(flow):
-	addons.request(flow)
-	
-class Counter:
-	def __init__(self):
-		self.num = 0
-		print("CONSTRUCTOR ")
-
-	def request(self, flow):
-		self.num = self.num + 1
-		print("We've seen %d flows ", self.num)
-		ctx.log.info("We've seen %d flows" % self.num)
-
-	def response(self, flow):
-		print("We've seen %d flows ", self.num)
-
-	def http_connect(self, flow):
-		print("HTTP CONNECT")
+    print("CATCHINIT!")
+    print(flow.client_conn.address)
+    flow.request.host = "www.whipped.in"
+    flow.request.scheme = 'http'    
+    flow.request.headers["Host"] = "www.whipped.in"
 
 
-addons = Counter()
+    #method = flow.request.path.split('/')[3].split('?')[0]
+
+    #if method == 'getjson':
+       #flow.request.path=flow.request.path.replace(method,"getxml")
+            
+
 
