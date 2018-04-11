@@ -25,12 +25,13 @@ $IPTABLES -t mangle -A internet -s 10.0.2.200 -j RETURN
 $IPTABLES -t mangle -A internet -s 127.0.0.1 -j RETURN
 $IPTABLES -t mangle -A internet --destination 10.0.2.200 -j RETURN
 $IPTABLES -t mangle -A internet --destination 127.0.0.1 -j RETURN
+
 # MAC address not found. Mark the packet 99
 $IPTABLES -t mangle -A internet -j MARK --set-mark 99
 ################################
 
 # Redirects web requests from Unauthorised users to logon Web Page
-$IPTABLES -t nat -A PREROUTING -m mark --mark 99 -p tcp --dport 80 -j DNAT --to-destination 10.0.0.1
+$IPTABLES -t nat -A PREROUTING -m mark --mark 99 -p tcp --dport 80 -j DNAT --to-destination 127.0.0.1:5000
 
 
 # Now that we've got to the forward filter, drop all packets
@@ -46,6 +47,13 @@ $IPTABLES -t filter -A INPUT -m mark --mark 99 -j DROP
 
 # Enable Internet connection sharing
 echo "1" > /proc/sys/net/ipv4/ip_forward
+#Disable ICMP resends
+sysctl -w net.ipv4.conf.all.send_redirects=0
+$IPTABLES -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+$IPTABLES -t nat -A PREROUTING -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 8080
 $IPTABLES -A FORWARD -i ppp0 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 $IPTABLES -A FORWARD -i eth0 -o ppp0 -j ACCEPT
 $IPTABLES -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+
+#Begin mitmproxy
+mitmproxy -T
