@@ -1,0 +1,92 @@
+/* Limit the Width of the Entire Application */
+
+#root {
+  min-width:68em;
+}
+
+.prevent-overflow {
+  overflow-wrap: break-word;
+}
+
+
+.component-with-different-cursor {
+  cursor: pointer;
+}
+
+.pop-text {
+  border-radius: .5em;
+  padding: .5em;
+  margin: .5em;
+  color: white;
+  font-weight: bold;
+}
+
+.white {
+  color: white;
+}
+
+.yellow {
+  background-color: #fcd64e
+}
+
+.backing-yellow {
+  color: #fadb14
+}
+
+.placard {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
+
+.placard-green {
+  background-color: #52c41a;
+}
+
+.placard-red {
+  background-color: #f5222d;
+}
+
+.backing-blue {
+  color: #1890ff
+}
+
+.result-panel {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.spacer {
+  color: white;
+  opacity: 0.0;
+}
+
+body {
+  background-color: #ECECEC;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-content {
+  /* height: 120px; */
+  min-height: 120px;
+  margin-top: -16px;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  padding: 16px;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: transparent;
+  background: transparent;
+}
+
+.card-container > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: #fff;
+  background: #fff;
+}
