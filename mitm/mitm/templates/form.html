@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Welcome</title>
+    <link rel="stylesheet" media="screen" href ="static/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+    <meta name="viewport" content = "width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+
+  <div class="container">
+  <img src="http://cache.marriott.com/Images/TNG/marriott_logo_gray.png"
+      className="hotel-logo"
+      alt="logo"
+      align="left"
+      />
+  <br>
+
+  <p align="left"><b>
+  Please Connect to the Hotel Network{"\n"}
+  </b></p>
+  <p align="left">
+  To upgrade to Enhanced Internet, you must first connect to the wireless network. To do so:
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  - Open your wireless utility or “Settings” app for Wi-Fi connections
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  - Select the guest network listed for your hotel
+  <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  - Re-enter the upgrade link: <a>internetupgrade.marriott.com</a>
+  <br>
+
+  <h2>Flask Web Form</h2>
+  <form  action="" method="post" role="form">
+    {{ form.csrf }}
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+      <br>
+      <label for="email">Email:</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="Email Address">
+      <br>
+
+    </div>
+    <button type="submit" class="btn btn-success">Sign Up</button>
+  </form>
+
+  <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-warning">
+                {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+</div>
+<br>
+</div>
+</div>
+</body>
+</html>

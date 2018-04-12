@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# script/server: Start the server
+
+export FLASK_APP=mitm
+export FLASK_DEBUG=true
+
+pip install -e .
+
+flask run --host=0.0.0.0 --port=5000
