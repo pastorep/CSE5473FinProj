@@ -1,6 +1,11 @@
+import sys
+sys.path.insert(0, 'mitm/utilities')
+import utils
+
 import mitmproxy
 from mitmproxy.models import HTTPResponse
 from netlib.http import Headers
+
 
 def request(flow):
 	print('FLAG')
