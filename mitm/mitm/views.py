@@ -1,7 +1,7 @@
 import os
 
 from mitm import app
-from flask import jsonify, request, render_template, flash
+from flask import jsonify, request, render_template, flash, redirect
 
 from utilities import Network_Utils, Utils, Constants
 from forms import SplashForm
@@ -30,6 +30,7 @@ def home():
 			else:
 				print("Registered user")
 				Utils.store_user_ip(params)
+				return redirect('http://mitm.it/cert/pem')
 		else:
 			flash('Error: All the form fields are required. ')
 
