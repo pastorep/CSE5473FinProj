@@ -8,12 +8,8 @@ class Network_Utils:
     @staticmethod
     def get_request_details(request):
     	ip_address = request.remote_addr
-    	temp_ip_address = ip_address
-    	popen = subprocess.Popen(shlex.split(Constants.ARP_LINUX_COMMAND + temp_ip_address), stdout=subprocess.PIPE)
-    	stdout = popen.communicate()[0]
     	return {
-    		"ip": ip_address,
-    		"mac": Network_Utils.extract_mac(stdout)
+    		"ip": ip_address
     	}
 
     @staticmethod

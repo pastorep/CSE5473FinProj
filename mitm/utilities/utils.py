@@ -17,24 +17,18 @@ class Utils:
         subprocess.call(shlex.split(Constants.UPDATE_IP_TABLE_LINUX_COMMAND_PART_1 + mac_address + Constants.UPDATE_IP_TABLE_LINUX_COMMAND_PART_2))
 
     @staticmethod
-    def store_user(params):
-        data = params["name"]
-        data = data + "\t" + params["email"]
-        data = data + "\t" + params["mac"]
-        data = data + "\t" + params["ip"]
-        data = data + "\t" + get_date()
+    def store_user_ip(params):
+        data = params["ip"]
         with open(Constants.USER_STORE_FILE, "a+") as w:
             w.write(data)
             w.write("\n")
 
     @staticmethod
-    def unblock_user(params):
-        store_user(params)
-        update_ip_table(params["mac"])
-        run_rmtrack(params["ip"])
-
-    @staticmethod
-    def get_date():
-        time_tuple = datetime.now()
-        string = time_tuple.strftime("YYYY-MM-DD")
-        return string
+    def check_user_ip_exists(params):
+        ip = params["ip"]
+        with open(Constants.USER_STORE_FILE, "r") as r:
+            for line in r:
+                line = line.strip()
+                if line == ip:
+                    return True
+        return False

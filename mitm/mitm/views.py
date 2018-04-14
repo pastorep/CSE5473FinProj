@@ -1,8 +1,14 @@
+import os
+
 from mitm import app
 from flask import jsonify, request, render_template, flash
 
-from utilities import Network_Utils, Utils
+from utilities import Network_Utils, Utils, Constants
 from forms import SplashForm
+
+if os.path.exists(Constants.USER_STORE_FILE) == False:
+    with open(Constants.USER_STORE_FILE, 'w'):
+        print("Created file")
 
 @app.route("/test")
 def test():
@@ -19,10 +25,11 @@ def home():
 	if request.method == 'POST':
 		if form.validate():
 			params = Network_Utils.get_request_details(request)
-			params["name"] = request.form['name']
-			params["email"] = request.form['email']
-			Utils.unblock_user(params)
-			flash('Thanks for registration ' + name)
+			if Utils.check_user_ip_exists(params):
+				print("User already exits")
+			else:
+				print("Registered user")
+				Utils.store_user_ip(params)
 		else:
 			flash('Error: All the form fields are required. ')
 
