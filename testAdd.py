@@ -6,11 +6,13 @@ def request(flow):
 	print('FLAG')
 	print(flow.request.pretty_host)
 	print(flow.client_conn.address)
-	addr = flow.client_conn.address
+	addr = str(flow.client_conn.address)
+	test = addr.find(':')
+	addr = addr[:test]
+	print(addr)
 
 	if flow.request.pretty_host is not '':
 		flow.request.host = "localhost"
-		#flow.request.host = "whipped.in"
 		flow.request.port = 5000
 		flow.request.scheme = 'http'
 		print('MODIFIED')
