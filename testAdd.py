@@ -18,7 +18,7 @@ def request(flow):
 	params = {"ip": addr}
 
 	# if flow.request.pretty_host is not '' and flow.request.pretty_host != "cache.marriott.com" and flow.request.pretty_host != "mitm.it" and flow.request.pretty_host != "localhost" and check_user_ip_exists(params):
-	if flow.request.pretty_host is not '' and check_user_ip_exists(params):
+	if flow.request.pretty_host is not '' and not check_user_ip_exists(params):
 		flow.request.headers["org_ip"] = addr
 		flow.request.host = "localhost"
 		flow.request.port = 5000
