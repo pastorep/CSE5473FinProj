@@ -1,7 +1,3 @@
-import sys
-sys.path.insert(0, 'mitm/utilities')
-import utils
-
 import mitmproxy
 from mitmproxy.models import HTTPResponse
 from netlib.http import Headers
@@ -23,7 +19,14 @@ def request(flow):
 		print('MODIFIED')
 		print(flow.request.host)
 
-
+def check_user_ip_exists(params):
+    ip = params["ip"]
+    with open("/var/lib/users", "r") as r:
+        for line in r:
+            line = line.strip()
+            if line == ip:
+                return True
+	return False
 
 #	print("CATCHINIT!")
 #	print(flow.client_conn.address)
