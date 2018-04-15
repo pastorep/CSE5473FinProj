@@ -12,7 +12,11 @@ def request(flow):
 	addr = addr[:test]
 	print(addr)
 
-	if flow.request.pretty_host is not '':
+	if flow.request.pretty_host == "mitm.it":
+		print('OK')
+
+	if flow.request.pretty_host is not '' and flow.request.pretty_host != "cache.marriott.com" and flow.request.pretty_host != "mitm.it" and flow.request.pretty_host != "localhost" :
+		flow.request.headers["CustomIP"] = addr	
 		flow.request.host = "localhost"
 		flow.request.port = 5000
 		flow.request.scheme = 'http'

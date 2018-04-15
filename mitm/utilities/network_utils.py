@@ -1,7 +1,7 @@
 import subprocess
 import shlex
 
-import Constants
+from .constants import Constants
 
 class Network_Utils:
 

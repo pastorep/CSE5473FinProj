@@ -22,9 +22,11 @@ def test():
 @app.route("/", methods=['GET', 'POST'])
 def home():
 	form = SplashForm(request.form)
+	print(request.headers.get("Custom"))
 	if request.method == 'POST':
 		if form.validate():
 			params = Network_Utils.get_request_details(request)
+			print(params)			
 			if Utils.check_user_ip_exists(params):
 				print("User already exits")
 			else:

@@ -4,7 +4,7 @@ import time
 
 from datetime import datetime
 
-import Constants
+from .constants import Constants
 
 class Utils:
 
