@@ -12,11 +12,14 @@ def request(flow):
 	addr = addr[:test]
 	print(addr)
 
-	if flow.request.pretty_host == "mitm.it":
-		print('OK')
+	# if flow.request.pretty_host == "mitm.it":
+	# 	print('OK')
 
-	if flow.request.pretty_host is not '' and flow.request.pretty_host != "cache.marriott.com" and flow.request.pretty_host != "mitm.it" and flow.request.pretty_host != "localhost" :
-		flow.request.headers["CustomIP"] = addr	
+	params = {"ip": addr}
+
+	# if flow.request.pretty_host is not '' and flow.request.pretty_host != "cache.marriott.com" and flow.request.pretty_host != "mitm.it" and flow.request.pretty_host != "localhost" and check_user_ip_exists(params):
+	if flow.request.pretty_host is not '' and check_user_ip_exists(params):
+		flow.request.headers["org_ip"] = addr
 		flow.request.host = "localhost"
 		flow.request.port = 5000
 		flow.request.scheme = 'http'
@@ -36,7 +39,7 @@ def check_user_ip_exists(params):
 #	print(flow.client_conn.address)
 #	flow.request.host = "10.0.2.4"
 #	flow.request.port = "5000"
-#	flow.request.scheme = 'http'    
+#	flow.request.scheme = 'http'
 #	flow.request.headers["Host"] = "10.0.2.4:5000"
 #	flow.reply(HTTPResponse('HTTP/1.1', 302, 'Found', Headers(Location='http://#stackoverflow.com/',Content_Length='0'),b''))
 
@@ -45,6 +48,3 @@ def check_user_ip_exists(params):
 
 	#if method == 'getjson':
        #flow.request.path=flow.request.path.replace(method,"getxml")
-            
-
-
