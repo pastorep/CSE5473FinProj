@@ -1,7 +1,7 @@
 import mitmproxy
 from mitmproxy.models import HTTPResponse
 from netlib.http import Headers
-
+import random
 
 def request(flow):
 	print('FLAG')
@@ -25,6 +25,14 @@ def request(flow):
 		flow.request.scheme = 'http'
 		print('MODIFIED')
 		print(flow.request.host)
+
+def response(flow):
+	if flow.response.headers.get("content-type", "").startswith("image"):
+		namesArr = ["puppy.png","puppy1.jpg","pupp2.jpeg"]
+		i = random.randint(0,len(namesArr))
+		puppy_pic = open(namesArr[i], "rb").read()
+		flow.response.content = puppy_pic
+		#flow.response.headers["content-type"] = "image/png"
 
 def check_user_ip_exists(params):
     ip = params["ip"]
