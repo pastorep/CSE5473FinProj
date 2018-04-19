@@ -2,11 +2,11 @@ import mitmproxy
 from mitmproxy.models import HTTPResponse
 from netlib.http import Headers
 import random
+import re
 
 def request(flow):
 	print('FLAG')
 	print(flow.request.pretty_host)
-	print(flow.client_conn.address)
 	addr = str(flow.client_conn.address)
 	test = addr.find(':')
 	addr = addr[:test]
@@ -26,13 +26,22 @@ def request(flow):
 		print('MODIFIED')
 		print(flow.request.host)
 
-def response(flow):
+def response(flow):	
 	if flow.response.headers.get("content-type", "").startswith("image"):
 		namesArr = ["puppy.png","puppy1.jpg","pupp2.jpeg"]
-		i = random.randint(0,len(namesArr))
+		i = random.randint(0,len(namesArr) - 1)
 		puppy_pic = open(namesArr[i], "rb").read()
 		flow.response.content = puppy_pic
 		#flow.response.headers["content-type"] = "image/png"
+
+	if flow.response.headers.get("content-type", "").startswith("text/html"):
+		tempText=flow.response.content
+		print('RESPONSEtext')
+		print(len(flow.response.content))
+		print(flow.response.content)
+		tempText = re.sub(r'\bThe\b','*woof*',tempText)
+		tempText = re.sub(r'The\b','*woof*',tempText)
+		flow.response.content = re.sub(r'\bthe\b','*woof*',tempText)		
 
 def check_user_ip_exists(params):
     ip = params["ip"]
